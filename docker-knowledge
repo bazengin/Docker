@@ -1,0 +1,84 @@
+1.getting started
+
+-what is docker?
+>docker is a tool for running applications in an isolated environment
+>similar to virtual machine
+>app run in same environment
+>just works
+>standard for software deployment
+
+-container vs vm
+>containers are an abstraction at the app layer that packages code and dependencies together.
+multiple containers can run on the same machine and share the os kernel with other containers, each
+running as isolated processes in user space.
+
+>virtual machines (vms) are an abstraction of physical hardware tuning one server into many servers.
+the hypervisor turning one server into many servers. the hypervisor allows multiple vms to run on a single 
+machine. each vm includes a full copy of an operating system, the application, necessary binaries and libraries - 
+taking up tens of gbs. vms can also be slow to boot.
+
+-benefits
+>run container in seconds instead of minutes
+>less resources results less disk space
+>uses less memory
+>does not need full os
+>deployment
+>testing
+
+-installation process
+>https://docs.docker.com/install/
+
+-verify docker installation
+
+
+2.containers
+
+image:
+>image is a template for creating and environment of your choice
+>snapshot
+>has everything need to run your apps
+>os, software, app code
+
+
+container:
+>running instance of an image
+
+-pulling docker images
+https://hub.docker.com
+
+$docker pull nginx
+$docker images
+
+-running containers
+$docker run nginx:latest
+$docker container ls
+$docker run -d nginx:latest (run container in detached mode!)
+$docker ps 
+
+-exposing ports
+$docker stop [container_id]
+$docker run -d -p 8080:80 nginx:latest
+
+-exposing multiple ports
+$docker run -d -p 3000:80 -p 8080:80 nginx:latest
+$docker ps
+
+-managing containers
+$docker ps
+$docker stop [container_id] or [container_name]
+$docker start [container_id] or [container_name]
+$docker ps -a
+$docker rm [container_id] (deletes container!)
+$docker rm $(docker ps -aq) [removes all containers!]
+$docker rm -f $(docker ps -aq) 
+
+-naming containers
+$docker ps
+$docker run --name website -d -p 3000:80 -p 8080:80 nginx:latest
+$docker ps
+$docker stop website
+or
+$docker start website
+
+-formatting output of docker ps command
+$docker ps --format="..."
